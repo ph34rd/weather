@@ -1,0 +1,33 @@
+{
+	"api": {
+		"openweathermap": {
+			"apiKey": "d2ff6a712fe742a852fcf74c0ba58de0",
+			"timeout": 5000,
+			"keepAlive": true,
+			"keepAliveMsecs": 3000
+		},
+		"yahoo": {
+			"timeout": 5000,
+			"keepAlive": true,
+			"keepAliveMsecs": 3000
+		}
+	},
+	"http": {
+		"bind": "0.0.0.0",
+		"port": 8080,
+		"connTimeout": 30000,
+		"graceTimeout": 35000,
+		"trustProxy": true
+	},
+	"db": {
+		"path": "./db/weather.db"
+	},
+	"updater": {
+		"conqurency": 5,
+		"schedule": "0 0 3 * * *"
+	},
+	"limiter": {
+		"tokens": 150,
+		"interval": 3600000
+	}
+}

@@ -14,6 +14,20 @@ function createExitFunc(code) {
 	};
 }
 
+function onStreamError(err) {
+	if (err.code === 'EPIPE') {
+		// patch write functions
+		process.stdout.write = () => {};
+		process.stderr.write = () => {};
+
+		throw err; // trigger gracefull shutdown
+	}
+}
+
+// gracefull shutdown on EPIPE
+process.stdout.on('error', onStreamError);
+process.stderr.on('error', onStreamError);
+
 // setup signal handler
 ['SIGINT', 'SIGTERM', 'SIGHUP'].forEach(function(sig) {
 	process.on(sig, () => {
